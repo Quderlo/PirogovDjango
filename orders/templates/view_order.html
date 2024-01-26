@@ -1,0 +1,42 @@
+<!-- orders/templates/view_order.html -->
+{% extends 'base.html' %}
+
+{% block title %}Просмотр заказа{% endblock %}
+
+{% block content %}
+    <h3>Просмотр заказа</h3>
+    <p><strong>Описание:</strong> {{ order.description }}</p>
+
+    <!-- Выводим текущую стоимость и форму для её изменения -->
+    <p><strong>Стоимость:</strong> {{ order.total_cost }}</p>
+    <form method="post" action="{% url 'view_order' order_id=order.id %}">
+        {% csrf_token %}
+        {{ update_cost_form.as_p }}
+        <button type="submit">Изменить стоимость</button>
+    </form>
+
+    <p><strong>Серийный номер:</strong> {{ order.serial_number }}</p>
+    <p><strong>Техника:</strong> {{ order.directory.name }} ({{ order.directory.type }})</p>
+    <p><strong>Клиент:</strong> {{ order.client.first_name }} {{ order.client.second_name }} ({{ order.client.telephone }})</p>
+    <p><strong>Работник:</strong> {{ order.user.first_name }} {{ order.user.last_name }}</p>
+
+    <h4>Статусы заказа:</h4>
+    {% if progress_list %}
+        <ul>
+            {% for progress in progress_list %}
+                <li>{{ progress.status }} - {{ progress.notes }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет статусов для этого заказа.</p>
+    {% endif %}
+
+    <h4>Добавить новый статус:</h4>
+    <form method="post" action="{% url 'view_order' order_id=order.id %}">
+        {% csrf_token %}
+        {{ progress_form.as_p }}
+        <button type="submit">Добавить статус</button>
+    </form>
+
+    <a href="{% url 'index' %}">Вернуться на главную</a>
+{% endblock %}

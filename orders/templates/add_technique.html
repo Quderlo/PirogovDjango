@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Добавить технику</h2>
+    <a href="{% url 'directory' %}">Вернуться</a>
+    <form method="post" action="{% url 'add_technique' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+{% endblock %}

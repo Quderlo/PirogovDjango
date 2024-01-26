@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Справочник техники{% endblock %}
+
+{% block content %}
+    <h3>Справочник техники</h3>
+    <a href="{% url 'add_technique' %}">Добавить технику</a>
+
+    {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; первая</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+                {% endif %}
+
+                <span class="current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+    {% if page_obj.object_list %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Тип</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for technique in page_obj %}
+                    <tr>
+                        <td>{{ technique.name }}</td>
+                        <td>{{ technique.type }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Справочник техники пуст</p>
+    {% endif %}
+{% endblock %}

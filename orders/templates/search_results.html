@@ -1,0 +1,40 @@
+<!-- orders/templates/search.html -->
+{% extends 'base.html' %}
+
+{% block title %}Поиск заказа{% endblock %}
+
+{% block content %}
+    <h3>Поиск заказа</h3>
+    {# Добавьте содержимое формы или текст по вашему выбору #}
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Описание</th>
+                <th>Стоимость</th>
+                <th>Серийный номер</th>
+                <th>Дата создания</th>
+                <th>Техника</th>
+                <th>Клиент</th>
+                <th>Работник</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.description }}</td>
+                    <td>{{ order.total_cost }}</td>
+                    <td>{{ order.serial_number }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.directory.name }} ({{ order.directory.type }})</td>
+                    <td>{{ order.client.first_name }} {{ order.client.second_name }} ({{ order.client.telephone }})</td>
+                    <td>{{ order.user.first_name }} {{ order.user.last_name }}</td>
+                    <td><a href="{% url 'view_order' order_id=order.id %}">Просмотр заказа</a></td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

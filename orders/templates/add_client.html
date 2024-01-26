@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление клиента{% endblock %}
+
+{% block content %}
+    <h3>Добавление клиента</h3>
+    <a href="{% url 'clients' %}">Вернуться к списку клиентов</a>
+    <form method="post" action="{% url 'add_client' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить клиента</button>
+    </form>
+{% endblock %}

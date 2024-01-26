@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление заказа{% endblock %}
+
+{% block content %}
+    <h3>Добавление заказа</h3>
+
+    <form method="post" action="{% url 'add_order' %}">
+        {% csrf_token %}
+
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        <br>
+
+        {{ form.total_cost.label_tag }}
+        {{ form.total_cost }}
+        <br>
+
+        {{ form.serial_number.label_tag }}
+        {{ form.serial_number }}
+        <br>
+
+        <div class="directory-field">
+            {{ form.directory.label_tag }}
+            {{ form.directory }}
+            <br>
+        </div>
+
+        <label for="id_create_new_directory">Создать новую технику</label>
+        {{ form.create_new_directory }}
+        <br>
+
+        <div class="new-directory-fields" style="display: none;">
+            {{ form.new_directory_name.label_tag }}
+            {{ form.new_directory_name }}
+            <br>
+
+            {{ form.new_directory_type.label_tag }}
+            {{ form.new_directory_type }}
+            <br>
+        </div>
+
+        {{ form.client.label_tag }}
+        {{ form.client }}
+        <br>
+
+        <button type="submit">Оформить заказ</button>
+    </form>
+
+    <a href="{% url 'orders' %}">Вернуться к списку заказов</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var createNewDirectoryCheckbox = document.getElementById('id_create_new_directory');
+            var directoryField = document.querySelector('.directory-field');
+            var newDirectoryFields = document.querySelector('.new-directory-fields');
+
+            createNewDirectoryCheckbox.addEventListener('change', function() {
+                directoryField.style.display = createNewDirectoryCheckbox.checked ? 'none' : 'block';
+                newDirectoryFields.style.display = createNewDirectoryCheckbox.checked ? 'block' : 'none';
+            });
+        });
+    </script>
+{% endblock %}

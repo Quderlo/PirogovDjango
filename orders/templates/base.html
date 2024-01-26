@@ -1,0 +1,34 @@
+<!-- orders/templates/base.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}Меню{% endblock %}</title>
+</head>
+<body>
+    <div class="nav-bar">
+        {% if user.is_authenticated %}
+            <h2><a class="header" href="{% url 'index' %}">Добро пожаловать, {{ user.first_name }}!</a></h2>
+            <div class="actions">
+                <button class="menu-button"><a href="{% url 'orders' %}">Заказы</a></button>
+                <button class="menu-button"><a href="{% url 'search' %}">Поиск заказа</a></button>
+                <button class="menu-button"><a href="{% url 'clients' %}">Клиенты</a></button>
+                <button class="menu-button"><a href="{% url 'workers' %}">Работники</a></button>
+                <button class="menu-button"><a href="{% url 'directory' %}">Справочник техники</a></button>
+                <button class="menu-button"><a href="{% url 'logout' %}">Выйти</a></button>
+            </div>
+        {% else %}
+            <h2><a class="header" href="{% url 'login' %}">Компастер</a></h2>
+            <div class="actions">
+                <button class="menu-button"><a href="{% url 'login' %}">Авторизоваться</a></button>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

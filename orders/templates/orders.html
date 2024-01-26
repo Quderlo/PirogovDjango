@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <h3>Ваши заказы</h3>
+    <a href="{% url 'add_order' %}">Оформить новый заказ</a>
+    {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Описание</th>
+                    <th>Общая стоимость</th>
+                    <th>Серийный номер</th>
+                    <th>Дата создания</th>
+                    <th>Справочник</th>
+                    <th>Клиент</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.description }}</td>
+                        <td>{{ order.total_cost }}</td>
+                        <td>{{ order.serial_number }}</td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.directory.name }}</td>
+                        <td>{{ order.client.first_name }} {{ order.client.second_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>У вас пока нет заказов.</p>
+    {% endif %}
+{% endblock %}

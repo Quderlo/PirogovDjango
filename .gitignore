@@ -1,0 +1,6 @@
+.idea/
+orders/migrations
+djangoPirogov/__pycache__/
+docker/
+orders/__pycache__/
+venv/

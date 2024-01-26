@@ -1,0 +1,45 @@
+/* orders/static/style.css */
+body {
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+.nav-bar {
+    background: linear-gradient(to right, rgba(134, 185, 239, 1), rgba(41, 128, 185, 1));
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-bar h2 {
+    color: white;
+    margin: 0;
+    font-size: 48px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-bar button {
+    background: rgba(134, 185, 239, 1);
+    color: white;
+    border: 2px solid white; /* Белая обводка */
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.nav-bar button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.nav-bar button:hover {
+    background: linear-gradient(to right, rgba(41, 128, 185, 1), rgba(134, 185, 239, 1));
+}
+

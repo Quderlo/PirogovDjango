@@ -1,0 +1,19 @@
+<!-- orders/templates/search.html -->
+{% extends 'base.html' %}
+
+{% block title %}Поиск заказа{% endblock %}
+
+{% block content %}
+    <h3>Поиск заказа</h3>
+
+    <form method="post" action="{% url 'search_order' %}">
+        {% csrf_token %}
+
+        {{ form.search_term.label_tag }}
+        {{ form.search_term }}
+        <br>
+
+        <button type="submit">Поиск</button>
+    </form>
+
+{% endblock %}
